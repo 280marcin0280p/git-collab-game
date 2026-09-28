@@ -18,10 +18,11 @@ Zespół składa się z trzech osób:
 ## PRZYGOTOWANIE
 - Każdy członek zespołu klonuje repozytorium od właściciela do lokalnego folderu (pendrive...)
 
-##RUNDA 1: SZTAFETA PO MAIN/MASTER
+## RUNDA 1: SZTAFETA PO MAIN/MASTER
+
 __Cel:__ zobaczyć najprostszy przypadek synchronizacji, w którym pull --ff-only wykonuje fast-forward.
 
-###1. Osoba A - release manager - wykonuje:
+### 1. Osoba A - release manager - wykonuje:
 
 ```
 git checkout main
