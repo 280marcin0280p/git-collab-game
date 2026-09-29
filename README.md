@@ -165,3 +165,150 @@ By finalnie wypchnąć zintegrowany branch `main`
 git push origin main
 ```
 
+## RUNDA 3: KONTROLOWANY KONFLIKT
+
+Cel: Zasymulowanie sytuacji, w której dwie osoby robią zmiany w tym samym miejscu w kodzie
+
+### DWIE Z OSÓB Z ZESPOŁU
+
+Tworzenie branchy:
+
+```
+git checkout -b decision/deploy-loginOsobyANaGithub
+```
+
+```
+git checkout -b decision/deploy-loginOsobyBNaGithub
+```
+
+### 1. OSOBA A:
+
+W pliku `release-room/status.md` zmienia z:
+
+```
+Decyzja wdrożeniowa: NIEUSTALONA
+```
+
+na 
+
+```
+Decyzja wdrożeniowa: WDRAŻAMY W PIĄTEK
+```
+
+Finalnie:
+```
+git add release-room/status.md
+git commit -m "Zaproponuj wdrożenie w piątek"
+git push -u origin decision/deploy-loginOsobyANaGithub
+```
+
+### 2. OSOBA B: 
+
+W pliku `release-room/status.md` zmienia z:
+
+```
+Decyzja wdrożeniowa: NIEUSTALONA
+```
+
+na 
+
+```
+Decyzja wdrożeniowa: WDRAŻAMY W PONIEDZIAŁEK
+```
+
+Finalnie:
+
+```
+git add release-room/status.md
+git commit -m "Zaproponuj wdrożenie w poniedziałek"
+git push -u origin decision/deploy-loginOsobyBNaGithub
+```
+
+### 3. RELEASE MANAGER ROZPOCZYNA INTEGRACJĘ:
+
+```
+git checkout main
+git pull --ff-only
+git pull --no-rebase --no-edit origin decision/deploy-loginOsobyANaGithub
+```
+
+Tutaj jeszcze nie ma konfliktu. Integrujemy drugiego brancha:
+
+```
+git pull --no-rebase --no-edit origin decision/deploy-loginOsobyBNaGithub
+```
+
+W tym momencie Git zgłosi konflikt w pliku `release-room/status.md`. 
+
+Straszne! Okropne! Sodomia! Gomoria! Sosnowiec... Jak żyć, panie premierze? Rozwiązując konflikt, panie paprykarzu.
+
+### 4. ROZWIĄZANIE KONFLIKTU KROK PO KROKU
+
+1. __ Rozpoznanie problemu __
+
+```
+git status
+```
+
+W odpowiedzi Git powinien zwrócić coś w ten deseń:
+
+```
+<<<<<<< HEAD
+Decyzja wdrożeniowa: WDRAŻAMY W PIĄTEK
+=======
+Decyzja wdrożeniowa: WDRAŻAMY W PONIEDZIAŁEK
+>>>>>>> decision/deploy-loginOsobyBNaGithub
+```
+
+Wyjaśnienie oznaczeń:
+
+1. HEAD — wersja aktualnego brancha,
+2. część pod ======= — wersja dołączanego brancha,
+3. znaczniki nie są składnią programu ani komentarzami,
+4. człowiek musi zdecydować, jaki ma być wynik.
+
+2. __ SZYBKIE SPOTKANIE WDROŻENIOWE __
+
+Zespół ustawia licznik na 60 sekund. W tym czasie należy podjąć decyzję jak powinno wyglądać wdrożenie. Np.:
+```
+Decyzja wdrożeniowa: WDRAŻAMY W PONIEDZIAŁEK PO POWTÓRZENIU TESTÓW, NIE PÓŹNIEJ NIŻ W CZWARTEK PRZED WEEKENDEM!
+```
+
+Konieczne jest usunięcie znaczników konfliktu z pliku, zapisane (CTRL+S), a następnie:
+
+3. __ Rozwiązanie konfliktu __
+
+```
+git add release-room/status.md
+git commit -m "Rozwiąż konflikt terminu wdrożenia"
+git push origin main
+```
+
+### 5. FINAŁ
+
+Każdy członek zespołu wykonuje:
+
+```
+git checkout main
+git pull --ff-only
+git status
+git log --graph --oneline --decorate --all -15
+```
+
+Oczekiwana odpowiedź z `git status`:
+
+```
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+```
+
+W historii (tej z `git log`) powinno być widać:
+- commity wszystkich osób,
+- branche funkcjonalne,
+- co najmniej jeden merge,
+- commit rozwiązujący konflikt,
+- aktualny main.
+
+## GRATULACJE!
