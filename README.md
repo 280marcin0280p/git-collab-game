@@ -312,3 +312,5 @@ W historii (tej z `git log`) powinno być widać:
 - aktualny main.
 
 ## GRATULACJE!
+
+https://forms.gle/4yWDRmA4zE7Fs2X18
