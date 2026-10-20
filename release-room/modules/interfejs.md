@@ -1,5 +1,5 @@
 # Moduł interfejs
 
-Odpowiedzialny: NIEPRZYDZIELONY
-Stan: NIEGOTOWY
-Opis zmiany: BRAK
+Odpowiedzialny: 280marcin0280p
+Stan: GOTOWY
+Opis zmiany: 67
