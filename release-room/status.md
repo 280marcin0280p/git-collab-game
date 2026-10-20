@@ -2,5 +2,5 @@
 
 Wersja: 1.0
 Stan wydania: ZABLOKOWANE
-Decyzja wdrożeniowa: WDRAŻAMY W PONIEDZIALEK
+Decyzja wdrożeniowa: DZISIAJ
 Kordynator: 280marcin0280p
